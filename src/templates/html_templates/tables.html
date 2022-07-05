@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Reports</title>
+
+    <style>
+        table {
+                    /* border-collapse: collapse; */
+                    font-family: Tahoma, Geneva, sans-serif;
+                    
+                }
+
+            table thead td {
+                padding-left: 5px;
+                background-color: #54585d;
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 15px;
+                border: 1px solid #54585d;
+            }
+            table tbody td {
+                font-size: 14px;
+                /* color: #272727; */
+                border: 1px solid #dddfe1;
+            }
+            table tbody tr {
+                font-size: 13px;
+                background-color: #f9fafb;
+            }
+            table tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+        .chart {
+            text-align: center;
+            margin: auto;
+            /* background-color: rgb(17, 10, 1); */
+            }
+
+            .row {
+                margin-bottom: 150px;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 80px;
+            }
+            .container {
+                /* height: 90vh; */
+                /* margin: 2rem; */
+                display: grid;
+                grid-template-columns: repeat( auto-fit, minmax(350px, 1fr));
+                grid-template-rows: 1fr 1fr;
+                /* grid-auto-columns: 100px */
+                }
+            .group-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* grid-template-rows: 1fr; */
+            /* grid-auto-columns: 100px */
+            }
+            .group-cell {
+            color: whitesmoke;
+            font-size: 2rem;
+            text-align: center;
+            padding: 2rem;
+            /* padding: 10px;*/
+            }
+            .cell {
+            color: rgb(125, 15, 15);
+            /* font-size: 2rem; */
+            text-align: center;
+            padding: 4rem;
+            /* padding: 10px; */
+            }
+    </style>
+  </head>
+    <body>
+    <table>
+        <tbody>
+
+            {% for record in template_obj.records %}
+
+            {% if record['isnewrow'] == 1 %}
+            <tr>
+            {% endif %}
+
+    
+        <td>
+            <!-- <div class="cell"> -->
+
+                <p style="color: darkblue; text-align: center; font-weight: bold;font-family: Tahoma, Geneva, sans-serif;">{{ record['module_name'] }}</p>
+                <table border="1" bgcolor="#000000">
+                    <thead>
+                    <tr bgcolor="#ffffff">
+                        {% for header in record["headers"] %}
+                        <td>{{header}}</td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in record["rows"] %}
+                    <tr bgcolor="#ffffff">
+                        {% for cell in row %}
+                        <td>{{cell}}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            <!-- </div> -->
+            </td>
+        
+    
+
+    {% if record['shouldrowend'] == 1 %}
+
+
+    </tr>
+    {% endif %}
+    
+{% endfor %}
+</tbody>
+</table>
+</body>

@@ -1,0 +1,25 @@
+let labels4 = ['Germany', 'France', 'UK', 'Italy', 'Spain', 'Others(23)'];
+let data4 = [83, 67, 66, 61, 47, 187];
+let colors4 = ['#49A9EA', '#36CAAB', '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
+
+
+{% for chart_obj in chart_object_list %}
+let {{ chart_obj.id_name }} = document.getElementById("{{ chart_obj.id_name }}").getContext('2d');
+
+let {{ chart_obj.id_name }}_1 = new chart_obj.{{ chart_obj.id_name }}, {
+    type: 'pie',
+    data: {
+        labels: {{ chart_obj.labels }},
+        datasets: [ {
+            data: {{ chart_obj.data }},
+            backgroundColor: {{ chart_obj.colour }}
+        }]
+    },
+    options: {
+        title: {
+            text: {{ chart_obj.heading }},
+            display: true
+        }
+    }
+});
+{% endfor %}

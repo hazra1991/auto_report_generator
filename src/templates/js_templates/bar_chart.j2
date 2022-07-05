@@ -1,0 +1,42 @@
+
+let {{ template_obj.id_name }} = document.getElementById("{{ template_obj.id_name }}").getContext('2d');
+
+let {{ template_obj.id_name }}_1 = new Chart({{ template_obj.id_name }}, {
+    type: 'bar',
+    data: {
+        labels: {{ template_obj.labels }},
+            datasets: {{template_obj.data}}
+    },
+    options: {
+        title: {
+            text: '{{ template_obj.heading }}',
+            display: true
+        },
+        legend: {
+          display: true,
+          labels:{
+            boxWidth: 10,
+            usePointStyle:true,
+            pointStyle:'circle'
+
+          }
+        },
+        scales: {
+  yAxes: [
+    {
+      ticks: {
+        min: 0,
+        max: this.max,// Your absolute max value
+        callback: function (value) {
+          return (value / this.max * 100).toFixed(0) + '%'; // convert it to percentage
+        },
+    },
+      scaleLabel: {
+        display: true,
+        labelString: 'Percentage',
+      },
+    },
+  ],
+}
+    }
+});

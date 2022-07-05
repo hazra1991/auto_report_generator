@@ -1,0 +1,25 @@
+let labels1 = ['YES', 'YES BUT IN GREEN'];
+let data1 = [69, 31];
+let colors1 = ['#49A9EA', '#36CAAB'];
+
+{% for chart_obj in chart_object_list %}
+let {{ chart_obj.id_name }} = document.getElementById("{{ chart_obj.id_name }}").getContext('2d');
+
+let {{ chart_obj.id_name }}_1 = new Chart({{ chart_obj.id_name }}, {
+    type: 'doughnut',
+    data: {
+        labels: {{ chart_obj.labels }},
+        datasets: [ {
+            data: {{ chart_obj.data }},
+            backgroundColor: {{ chart_obj.colour }}
+        }]
+    },
+    options: {
+        title: {
+            text: {{ chart_obj.heading }},
+            display: true
+        }
+    }
+});
+{% endfor %}
+
